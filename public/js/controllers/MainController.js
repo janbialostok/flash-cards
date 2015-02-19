@@ -12,36 +12,6 @@ app.factory('FlashCardsFactory', function ($http){
     };
 });
 
-app.controller('FlashCardController', function($scope, ScoreFactory){
-    
-    $scope.flashCard = {
-        question: 'What is Angular?',
-        answers: [
-            { text: 'A front-end framework for great power!', correct: true },
-            { text: 'Something lame, who cares, whatever.', correct: false },
-            { text: 'Some kind of fish, right?', correct: false }
-        ]
-    };
-
-    $scope.answered = false;
-    $scope.answeredCorrectly;
-
-    $scope.answerQuestion = function(val){
-        if (val){
-            $scope.answeredCorrectly = true;
-            ScoreFactory.correct += 1;
-        }
-        else{
-            $scope.answeredCorrectly = false;  
-            ScoreFactory.incorrect += 1; 
-            $scope.answeredClass = 'incorrect';
-        }
-        $scope.answered = true;
-        setTimeout(function(){ $scope.flashCards.shift(); $scope.$apply(); }, 1000);
-    };
-
-});
-
 app.filter('cheat', function(){
     return function(elem){
         if (arguments[1]){

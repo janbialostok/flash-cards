@@ -1,7 +1,11 @@
 var path = require('path');
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 module.exports = app;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var publicPath = path.join(__dirname, '../public');
 var indexHtmlPath = path.join(__dirname, '../index.html');
@@ -28,4 +32,12 @@ app.get('/cards', function (req, res) {
         }, Math.random() * 1000);
     });
 
+});
+
+app.post('/cards', function(req, res){
+    var cardData = req.body;
+
+    FlashCardModel.create(cardData).then(function () {
+        res.status(200).end();
+    });
 });

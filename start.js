@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/flash-cards');
 
+
 var server = require('./server');
 
 mongoose.connection.once('open', function () {
